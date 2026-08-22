@@ -96,7 +96,7 @@ begin_person_day :: proc(w: ^World, p: ^Person, day: i32) {
 	p.clock = 0
 
 	if !p.alive {
-		path_push(p, hx, hy, 10000)
+		path_push(p, hx, hy, 10000, .Sleep, .Rest)
 		p.minutes_home = day
 		p.clock = day
 		p.sleep_start = day
@@ -112,12 +112,13 @@ begin_person_day :: proc(w: ^World, p: ^Person, day: i32) {
 		p.minutes_sleep = person_sleep_minutes(w.cfg, p)
 		if p.minutes_sleep > day do p.minutes_sleep = day
 		p.minutes_home = day - p.minutes_sleep
-		path_push(p, hx, hy, 10000)
+		path_push(p, hx, hy, clock_to_t(wake, day), .Sleep, .Rest)
+		path_push(p, hx, hy, 10000, .At_Home, .Rest)
 		p.clock = day
 		return
 	}
 
-	path_push(p, hx, hy, clock_to_t(wake, day))
+	path_push(p, hx, hy, clock_to_t(wake, day), .Sleep, .Rest)
 	p.minutes_sleep += wake
 	p.clock = wake
 
@@ -129,7 +130,7 @@ begin_person_day :: proc(w: ^World, p: ^Person, day: i32) {
 	if morn > 0 {
 		p.clock += morn
 		p.minutes_home += morn
-		path_push(p, hx, hy, clock_to_t(p.clock, day))
+		path_push(p, hx, hy, clock_to_t(p.clock, day), .At_Home, .Rest)
 	}
 }
 
@@ -173,11 +174,11 @@ apply_bout_path :: proc(w: ^World, p: ^Person, h: ^Household, a: Activity, cell:
 	case .Rest:
 		p.clock += labor
 		p.minutes_home += labor
-		path_push(p, hx, hy, clock_to_t(p.clock, day))
+		path_push(p, hx, hy, clock_to_t(p.clock, day), .At_Home, .Rest)
 	case .Craft_Spear:
 		p.clock += labor
 		p.minutes_work += labor
-		path_push(p, hx, hy, clock_to_t(p.clock, day))
+		path_push(p, hx, hy, clock_to_t(p.clock, day), .Working, .Craft_Spear)
 	case .Visit:
 		ox, oy := hx, hy
 		if partner >= 0 && partner < i32(len(w.households)) {
@@ -190,25 +191,25 @@ apply_bout_path :: proc(w: ^World, p: ^Person, h: ^Household, a: Activity, cell:
 		if linger <= 0 do linger = w.cfg.visit_linger
 		p.clock += one
 		p.minutes_travel += one
-		path_push(p, ox, oy, clock_to_t(p.clock, day))
+		path_push(p, ox, oy, clock_to_t(p.clock, day), .Visiting, .Visit)
 		p.clock += linger
 		p.minutes_visit += linger
-		path_push(p, ox, oy, clock_to_t(p.clock, day))
+		path_push(p, ox, oy, clock_to_t(p.clock, day), .Visiting, .Visit)
 		p.clock += one
 		p.minutes_travel += one
-		path_push(p, hx, hy, clock_to_t(p.clock, day))
+		path_push(p, hx, hy, clock_to_t(p.clock, day), .At_Home, .Rest)
 	case .Forage, .Hunt, .Gather_Wood, .Gather_Stone:
 		wx, wy := map_milli(cell)
 		one := person_walk_minutes(w.cfg, p, h.home.x, h.home.y, cell.x, cell.y)
 		p.clock += one
 		p.minutes_travel += one
-		path_push(p, wx, wy, clock_to_t(p.clock, day))
+		path_push(p, wx, wy, clock_to_t(p.clock, day), .Working, a)
 		p.clock += labor
 		p.minutes_work += labor
-		path_push(p, wx, wy, clock_to_t(p.clock, day))
+		path_push(p, wx, wy, clock_to_t(p.clock, day), .Working, a)
 		p.clock += one
 		p.minutes_travel += one
-		path_push(p, hx, hy, clock_to_t(p.clock, day))
+		path_push(p, hx, hy, clock_to_t(p.clock, day), .At_Home, .Rest)
 	}
 	if p.clock > day {
 		p.clock = day
@@ -225,13 +226,13 @@ end_person_day :: proc(w: ^World, p: ^Person, day: i32) {
 		stay := p.sleep_start - p.clock
 		p.minutes_home += stay
 		p.clock = p.sleep_start
-		path_push(p, hx, hy, clock_to_t(p.clock, day))
+		path_push(p, hx, hy, clock_to_t(p.clock, day), .At_Home, .Rest)
 	}
 	if p.clock < day {
 		p.minutes_sleep += day - p.clock
 		p.clock = day
 	}
-	path_push(p, hx, hy, 10000)
+	path_push(p, hx, hy, 10000, .Sleep, .Rest)
 	apply_travel_fatigue(w, p)
 	w.acc.travel_minutes_total += p.minutes_travel
 }

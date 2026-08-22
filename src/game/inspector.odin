@@ -97,6 +97,12 @@ draw_person_inspector :: proc(app: ^App, id: i32, x, y0, w: f32) -> f32 {
 	}
 	y += 22
 
+	doing, act_now, walking := sim.person_now(p, person_anim_u(app), app.view_scale)
+	draw_text(fmt.tprintf("Now: %s", sim.person_now_label(doing, act_now, walking)), i32(x), i32(y), 15, COL_ACCENT)
+	if in_rec({x, y, w, 18}) {
+		ui_tooltip = "What this person is doing at the current time of day on the map."
+	}
+	y += 22
 	draw_text(fmt.tprintf("Last bout: %s", sim.activity_name(p.intent_activity)), i32(x), i32(y), 15, COL_TEXT)
 	y += 22
 	if p.intent_activity != .Rest && p.intent_activity != .Visit {
@@ -225,7 +231,8 @@ draw_household_inspector :: proc(app: ^App, id: i32, x, y0, w: f32) -> f32 {
 		}
 		act := ""
 		if p.alive && st != .Infant {
-			act = fmt.tprintf("  %s", sim.activity_name(p.intent_activity))
+			d, a, wk := sim.person_now(p, person_anim_u(app), app.view_scale)
+			act = fmt.tprintf("  %s", sim.person_now_label(d, a, wk))
 		}
 		if st == .Infant && p.alive {
 			act = "  (in hut)"

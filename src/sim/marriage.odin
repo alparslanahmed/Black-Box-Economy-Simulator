@@ -379,8 +379,8 @@ settle_marriage :: proc(w: ^World, man, woman: ^Person, place: Residence) -> boo
 	})
 	// Walk to the new home this afternoon.
 	dx, dy := map_milli(dest.home)
-	path_push(man, dx, dy, 9000)
-	path_push(woman, dx, dy, 9000)
+	path_push(man, dx, dy, 9000, .Walking, .Rest)
+	path_push(woman, dx, dy, 9000, .Walking, .Rest)
 	return true
 }
 

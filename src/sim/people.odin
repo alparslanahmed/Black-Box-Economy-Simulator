@@ -291,7 +291,7 @@ member_home_milli :: proc(h: ^Household, slot: i32) -> (i32, i32) {
 
 path_reset :: proc(p: ^Person, x, y: i32) {
 	p.path_n = 1
-	p.path[0] = Path_Pt{x = x, y = y, t = 0}
+	p.path[0] = Path_Pt{x = x, y = y, t = 0, doing = .Sleep, activity = .Rest}
 	p.trade_hh = -1
 }
 
@@ -313,10 +313,12 @@ path_free_slot :: proc(p: ^Person) {
 	p.path_n = PATH_MAX - 1
 }
 
-path_push :: proc(p: ^Person, x, y, t: i32) {
+path_push :: proc(p: ^Person, x, y, t: i32, doing: Person_Doing = .At_Home, activity: Activity = .Rest) {
 	if p.path_n <= 0 {
 		path_reset(p, x, y)
 		p.path[0].t = t
+		p.path[0].doing = doing
+		p.path[0].activity = activity
 		return
 	}
 	last := p.path[p.path_n - 1]
@@ -324,20 +326,44 @@ path_push :: proc(p: ^Person, x, y, t: i32) {
 	if tt < last.t {
 		tt = last.t
 	}
-	if last.x == x && last.y == y && tt == last.t {
+	if last.x == x && last.y == y && tt == last.t && last.doing == doing {
 		return
 	}
-	// Same cell at a later t is a hold, not a merge. Merging smeared walking
-	// into work/sleep so people crawled then snapped.
 	if p.path_n >= PATH_MAX {
 		path_free_slot(p)
 	}
 	if p.path_n >= PATH_MAX {
-		p.path[PATH_MAX - 1] = Path_Pt{x = x, y = y, t = tt}
+		p.path[PATH_MAX - 1] = Path_Pt{x = x, y = y, t = tt, doing = doing, activity = activity}
 		return
 	}
-	p.path[p.path_n] = Path_Pt{x = x, y = y, t = tt}
+	p.path[p.path_n] = Path_Pt{x = x, y = y, t = tt, doing = doing, activity = activity}
 	p.path_n += 1
+}
+
+person_now :: proc(p: ^Person, u: f32, world_sum: f32 = 0) -> (doing: Person_Doing, activity: Activity, walking: bool) {
+	doing = .Sleep
+	activity = .Rest
+	if p == nil || p.path_n <= 0 {
+		return
+	}
+	_, _, rt := person_at_view_u(p, u, world_sum)
+	t := i32(rt + 0.5)
+	if t <= p.path[0].t || p.path_n == 1 {
+		return p.path[0].doing, p.path[0].activity, false
+	}
+	for i: i32 = 1; i < p.path_n; i += 1 {
+		b := p.path[i]
+		a := p.path[i - 1]
+		if t <= b.t {
+			dist := octile_milli(a.x, a.y, b.x, b.y)
+			if dist > VIEW_SAME_DIST {
+				return .Walking, b.activity, true
+			}
+			return b.doing, b.activity, false
+		}
+	}
+	last := p.path[p.path_n - 1]
+	return last.doing, last.activity, false
 }
 
 lerp_i32 :: proc(a, b, s, span: i32) -> i32 {
@@ -360,25 +386,25 @@ person_pos_milli :: proc(p: ^Person, t: i32) -> (i32, i32) {
 	return x, y
 }
 
-person_view_pos_milli :: proc(p: ^Person, vis_t: i32) -> (i32, i32) {
+person_view_pos_milli :: proc(p: ^Person, vis_t: i32, world_sum: f32 = 0) -> (i32, i32) {
 	u := f32(vis_t) / 10000
-	x, y, _ := person_at_view_u(p, u)
+	x, y, _ := person_at_view_u(p, u, world_sum)
 	return i32(x + 0.5), i32(y + 0.5)
 }
 
-person_view_pos_f32 :: proc(p: ^Person, u: f32) -> (f32, f32) {
-	x, y, _ := person_at_view_u(p, u)
+person_view_pos_f32 :: proc(p: ^Person, u: f32, world_sum: f32 = 0) -> (f32, f32) {
+	x, y, _ := person_at_view_u(p, u, world_sum)
 	return x, y
 }
 
-person_view_real_t :: proc(p: ^Person, vis_t: i32) -> i32 {
+person_view_real_t :: proc(p: ^Person, vis_t: i32, world_sum: f32 = 0) -> i32 {
 	u := f32(vis_t) / 10000
-	_, _, rt := person_at_view_u(p, u)
+	_, _, rt := person_at_view_u(p, u, world_sum)
 	return i32(rt + 0.5)
 }
 
-person_view_real_t_u :: proc(p: ^Person, u: f32) -> i32 {
-	_, _, rt := person_at_view_u(p, u)
+person_view_real_t_u :: proc(p: ^Person, u: f32, world_sum: f32 = 0) -> i32 {
+	_, _, rt := person_at_view_u(p, u, world_sum)
 	return i32(rt + 0.5)
 }
 
@@ -446,7 +472,52 @@ collapse_path :: proc(p: ^Person, out: []Path_Pt) -> i32 {
 	return n
 }
 
-person_at_view_u :: proc(p: ^Person, u: f32) -> (x, y, real_t: f32) {
+view_seg_weight :: proc(a, b: Path_Pt) -> f32 {
+	dist := octile_milli(a.x, a.y, b.x, b.y)
+	dt := b.t - a.t
+	if dt < 0 do dt = 0
+	if dist > VIEW_SAME_DIST {
+		wt := f32(dist) * VIEW_MOVE_PER_CELL / 1000
+		if wt < VIEW_MIN_MOVE do wt = VIEW_MIN_MOVE
+		return wt
+	}
+	wt := f32(dt) * VIEW_STILL_SCALE
+	if dt > 0 && wt < VIEW_MIN_HOLD do wt = VIEW_MIN_HOLD
+	if wt < 1 do wt = 1
+	return wt
+}
+
+person_view_sum :: proc(p: ^Person) -> f32 {
+	if p == nil || p.path_n <= 0 {
+		return 0
+	}
+	pts: [PATH_MAX]Path_Pt
+	n := collapse_path(p, pts[:])
+	if n <= 1 {
+		return 0
+	}
+	sum: f32
+	for i: i32 = 0; i < n - 1; i += 1 {
+		sum += view_seg_weight(pts[i], pts[i + 1])
+	}
+	return sum
+}
+
+world_view_scale :: proc(w: ^World) -> f32 {
+	if w == nil {
+		return 1
+	}
+	best: f32 = 1
+	for i: i32 = 0; i < w.person_count; i += 1 {
+		p := &w.people[i]
+		if !p.alive do continue
+		s := person_view_sum(p)
+		if s > best do best = s
+	}
+	return best
+}
+
+person_at_view_u :: proc(p: ^Person, u: f32, world_sum: f32 = 0) -> (x, y, real_t: f32) {
 	if p == nil || p.path_n <= 0 {
 		return 0, 0, 0
 	}
@@ -464,38 +535,32 @@ person_at_view_u :: proc(p: ^Person, u: f32) -> (x, y, real_t: f32) {
 		return f32(a.x), f32(a.y), f32(a.t)
 	}
 
-	w: [PATH_MAX]f32
+	wts: [PATH_MAX]f32
 	sum: f32
 	seg := n - 1
 	for i: i32 = 0; i < seg; i += 1 {
-		a := pts[i]
-		b := pts[i + 1]
-		dist := octile_milli(a.x, a.y, b.x, b.y)
-		dt := b.t - a.t
-		if dt < 0 do dt = 0
-		if dist > VIEW_SAME_DIST {
-			wt := f32(dist) * VIEW_MOVE_PER_CELL / 1000
-			if wt < VIEW_MIN_MOVE do wt = VIEW_MIN_MOVE
-			w[i] = wt
-		} else {
-			wt := f32(dt) * VIEW_STILL_SCALE
-			if dt > 0 && wt < VIEW_MIN_HOLD do wt = VIEW_MIN_HOLD
-			if wt < 1 do wt = 1
-			w[i] = wt
-		}
-		sum += w[i]
+		wts[i] = view_seg_weight(pts[i], pts[i + 1])
+		sum += wts[i]
 	}
 	if sum <= 0 {
 		a := pts[0]
 		return f32(a.x), f32(a.y), f32(a.t)
 	}
 
-	target := uu * sum
+	scale := world_sum
+	if scale < sum {
+		scale = sum
+	}
+	target := uu * scale
+	if target >= sum {
+		last := pts[n - 1]
+		return f32(last.x), f32(last.y), f32(last.t)
+	}
 	acc: f32
 	for i: i32 = 0; i < seg; i += 1 {
-		next := acc + w[i]
+		next := acc + wts[i]
 		if target <= next || i == seg - 1 {
-			span := w[i]
+			span := wts[i]
 			s := target - acc
 			if s < 0 do s = 0
 			if s > span do s = span

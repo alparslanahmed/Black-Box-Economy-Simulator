@@ -102,7 +102,7 @@ cam_follow_person :: proc(app: ^App, view: rl.Rectangle) {
 		app.follow = false
 		return
 	}
-	mx, my := sim.person_view_pos_f32(p, person_anim_u(app))
+	mx, my := sim.person_view_pos_f32(p, person_anim_u(app), app.view_scale)
 	wx := mx / 1000.0 * CELL_PX
 	wy := my / 1000.0 * CELL_PX
 	app.cam.x = wx - view.width / (2 * app.cam.zoom)
@@ -298,7 +298,7 @@ view_clock_minutes :: proc(app: ^App) -> i32 {
 	if app.selected_person >= 0 {
 		p := sim.person_at(app.world, app.selected_person)
 		if p != nil && p.alive {
-			rt = sim.person_view_real_t_u(p, u)
+			rt = sim.person_view_real_t_u(p, u, app.view_scale)
 			n = 1
 		}
 	}
@@ -307,7 +307,7 @@ view_clock_minutes :: proc(app: ^App) -> i32 {
 			p := &app.world.people[i]
 			if !p.alive do continue
 			if sim.life_stage(p) == .Infant do continue
-			rt += sim.person_view_real_t_u(p, u)
+			rt += sim.person_view_real_t_u(p, u, app.view_scale)
 			n += 1
 		}
 	}
@@ -324,7 +324,7 @@ view_clock_minutes :: proc(app: ^App) -> i32 {
 }
 
 person_screen_pos :: proc(app: ^App, view: rl.Rectangle, p: ^sim.Person) -> rl.Vector2 {
-	mx, my := sim.person_view_pos_f32(p, person_anim_u(app))
+	mx, my := sim.person_view_pos_f32(p, person_anim_u(app), app.view_scale)
 	return world_to_screen(app.cam, view, mx / 1000.0 * CELL_PX, my / 1000.0 * CELL_PX)
 }
 

@@ -97,9 +97,19 @@ Life_Stage :: enum u8 {
 PATH_MAX :: 32
 MAX_MEMBERS :: 8
 
+Person_Doing :: enum u8 {
+	Sleep,
+	At_Home,
+	Walking,
+	Working,
+	Visiting,
+}
+
 Path_Pt :: struct {
-	x, y: i32, // milli-cells
-	t:    i32, // 0..10_000 through the day
+	x, y:     i32, // milli-cells
+	t:        i32, // 0..10_000 through the day
+	doing:    Person_Doing,
+	activity: Activity,
 }
 
 Person :: struct {
@@ -436,6 +446,34 @@ activity_name :: proc(a: Activity) -> string {
 	case .Craft_Spear:  return "Craft spear"
 	case .Rest:         return "Rest"
 	case .Visit:        return "Visit neighbor"
+	}
+	return "?"
+}
+
+person_now_label :: proc(doing: Person_Doing, activity: Activity, walking: bool) -> string {
+	if walking {
+		switch activity {
+		case .Forage:       return "Walking to forage"
+		case .Hunt:         return "Walking to hunt"
+		case .Gather_Wood:  return "Walking to gather wood"
+		case .Gather_Stone: return "Walking to gather stone"
+		case .Craft_Spear:  return "Walking home"
+		case .Rest:         return "Walking home"
+		case .Visit:        return "Walking to a neighbor"
+		}
+		return "Walking"
+	}
+	switch doing {
+	case .Sleep:
+		return "Sleeping"
+	case .At_Home:
+		return "At home"
+	case .Walking:
+		return "Walking"
+	case .Working:
+		return activity_name(activity)
+	case .Visiting:
+		return "Visiting a neighbor"
 	}
 	return "?"
 }

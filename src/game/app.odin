@@ -29,6 +29,7 @@ App :: struct {
 	speed:      f32,
 	acc:        f32,
 	day_anim:   f32,
+	view_scale: f32,
 	follow:     bool,
 
 	overlay:    sim.Overlay_Kind,
@@ -237,6 +238,7 @@ update_sim :: proc(app: ^App) {
 	if rl.IsKeyPressed(.TWO) do app.speed = 5
 	if rl.IsKeyPressed(.THREE) do app.speed = 20
 	if rl.IsKeyPressed(.FOUR) do app.speed = 100
+	if rl.IsKeyPressed(.FIVE) do app.speed = 1000
 	if rl.IsKeyPressed(.L) && app.selected_person >= 0 {
 		app.follow = !app.follow
 	}
@@ -247,6 +249,7 @@ update_sim :: proc(app: ^App) {
 		app.cam_ready = true
 	}
 	if app.world != nil {
+		app.view_scale = sim.world_view_scale(app.world)
 		pan_keys := rl.IsKeyDown(.W) || rl.IsKeyDown(.A) || rl.IsKeyDown(.S) || rl.IsKeyDown(.D) ||
 			rl.IsKeyDown(.UP) || rl.IsKeyDown(.DOWN) || rl.IsKeyDown(.LEFT) || rl.IsKeyDown(.RIGHT)
 		cam_update(&app.cam, mapr, app.world.cfg.map_w, app.world.cfg.map_h)
@@ -268,6 +271,9 @@ update_sim :: proc(app: ^App) {
 			steps += 1
 		}
 		app.acc = app.day_anim
+		if steps > 0 {
+			app.view_scale = sim.world_view_scale(app.world)
+		}
 	}
 }
 
@@ -379,7 +385,8 @@ draw_topbar :: proc(app: ^App, r: rl.Rectangle) {
 			start_world(app)
 		}
 	}
-	if step(&bx, "100x", app.speed == 100, "100 simulated days per real second") do app.speed = 100
+	if step(&bx, "1000x", app.speed == 1000, "1000 simulated days per real second. Key 5.") do app.speed = 1000
+	if step(&bx, "100x", app.speed == 100, "100 simulated days per real second. Key 4.") do app.speed = 100
 	if step(&bx, "20x", app.speed == 20, "20 days / sec") do app.speed = 20
 	if step(&bx, "5x", app.speed == 5, "5 days / sec") do app.speed = 5
 	if step(&bx, "1x", app.speed == 1, "1 day / sec") do app.speed = 1

@@ -285,6 +285,7 @@ test_view_motion_no_teleport :: proc() -> bool {
 	w := sim.world_create(42, cfg, true)
 	defer sim.world_destroy(w)
 	sim.sim_days(w, 5)
+	scale := sim.world_view_scale(w)
 	// 0.005 of visual day is a bit more than one frame at 0.25x / 60fps.
 	step: f32 = 0.005
 	max_jump := f32(1800) // 1.8 cells in milli
@@ -292,11 +293,11 @@ test_view_motion_no_teleport :: proc() -> bool {
 		p := &w.people[i]
 		if !p.alive || !sim.can_work(p) do continue
 		if p.path_n < 2 do continue
-		px, py := sim.person_view_pos_f32(p, 0)
+		px, py := sim.person_view_pos_f32(p, 0, scale)
 		u: f32 = step
 		for u <= 1.0001 {
 			if u > 1 do u = 1
-			x, y := sim.person_view_pos_f32(p, u)
+			x, y := sim.person_view_pos_f32(p, u, scale)
 			dx := x - px
 			dy := y - py
 			if dx < 0 do dx = -dx
