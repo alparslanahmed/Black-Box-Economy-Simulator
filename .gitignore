@@ -1,0 +1,10 @@
+build/
+*.exe
+*.pdb
+*.obj
+*.ll
+*.bc
+.vs/
+.vscode/
+__pycache__/
+*.pyc
