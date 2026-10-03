@@ -1,13 +1,12 @@
 @echo off
 setlocal
-if not exist build\blackbox.exe (
+if not exist "%~dp0build\blackbox-server.exe" (
     call "%~dp0build.bat"
     if errorlevel 1 exit /b 1
 )
-if not exist build\raylib.dll (
-    copy /Y "%USERPROFILE%\odin\dist\vendor\raylib\windows\raylib.dll" build\raylib.dll >nul
-)
-pushd "%~dp0"
-build\blackbox.exe %*
+pushd "%~dp0backend"
+echo Open http://127.0.0.1:8080 in your browser.
+"%~dp0build\blackbox-server.exe" %*
+set "BLACKBOX_EXIT=%ERRORLEVEL%"
 popd
-endlocal
+exit /b %BLACKBOX_EXIT%

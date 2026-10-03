@@ -1,0 +1,94 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "User-provided Black Box UI reference",
+  "assets": [
+    {
+      "name": "tree-pine",
+      "prompt": "Use case: stylized-concept. Asset type: individual transparent sprite for a polished isometric prehistoric economy strategy game. Primary request: one dense mature evergreen pine tree, entire tree and trunk visible, isolated. Hand-painted 3D game art, refined faceted foliage, dark forest teal and moss green, warm sunlight from upper left, view from above at 45 degrees, matching the rich woodland diorama of the user's Black Box reference. Centered with ample transparent margin, soft small contact shadow. No ground tile, no scene, no lettering, no frame. Actual transparent alpha background. Single tree only, usable as a repeating game object."
+    },
+    {
+      "name": "hut-02",
+      "prompt": "Use case: stylized-concept. Individual game sprite for Black Box Economy Simulator. Hand-painted isometric 3D strategy game art, detailed but readable at 100 pixels, moss greens and warm straw ochres, warm upper-left sunlight, view 45 degrees down from above. Entire subject centered with transparent margin, actual transparent alpha background, subtle small contact shadow. No text, border, UI, backdrop or terrain tile. One broad round prehistoric family hut with dark brown reed thatching, weathered timber walls, slightly lower roof, a small firewood pile against its side and an ochre hide over the doorway."
+    },
+    {
+      "name": "hut-01",
+      "prompt": "Use case: stylized-concept. Individual game sprite for Black Box Economy Simulator. Hand-painted isometric 3D strategy game art, detailed but readable at 100 pixels, moss greens and warm straw ochres, warm upper-left sunlight, view 45 degrees down from above. Entire subject centered with transparent margin, actual transparent alpha background, subtle small contact shadow. No text, border, UI, backdrop or terrain tile. One small circular prehistoric family hut with a tall layered golden thatch conical roof, timber and clay walls, a dark open doorway, two small woven baskets, little uneven stone doorstep."
+    },
+    {
+      "name": "hut-03",
+      "prompt": "Use case: stylized-concept. Individual game sprite for Black Box Economy Simulator. Hand-painted isometric 3D strategy game art, detailed but readable at 100 pixels, moss greens and warm straw ochres, warm upper-left sunlight, view 45 degrees down from above. Entire subject centered with transparent margin, actual transparent alpha background, subtle small contact shadow. No text, border, UI, backdrop or terrain tile. One compact circular prehistoric dwelling with a bright honey-gold thatched roof and little open roof vent, short woven-wattle walls, cream clay patches, wood beams and a clay pot by its doorway."
+    },
+    {
+      "name": "berry-bush",
+      "prompt": "Use case: stylized-concept. Individual isolated sprite for a hand-painted isometric prehistoric strategy game, warm upper-left sunlight, 45 degree elevated camera, refined chunky shapes and beautiful painterly detail, moss green / muted woodland palette. Actual transparent background, whole object fully visible with margin and small contact shadow. No text, no frame, no terrain tile, no scene. A low lush green wild berry bush, many small red berries among rounded dark leaves, a few grasses at the base."
+    },
+    {
+      "name": "stone-deposit",
+      "prompt": "Use case: stylized-concept. Individual isolated sprite for a hand-painted isometric prehistoric strategy game, warm upper-left sunlight, 45 degree elevated camera, refined chunky shapes and beautiful painterly detail, moss green / muted woodland palette. Actual transparent background, whole object fully visible with margin and small contact shadow. No text, no frame, no terrain tile, no scene. A cluster of three large jagged granite boulders and smaller loose flint rocks, warm slate grey faces, subtle pale highlights, a little moss on the bottom."
+    },
+    {
+      "name": "deer",
+      "prompt": "Use case: stylized-concept. Individual isolated sprite for a hand-painted isometric prehistoric strategy game, warm upper-left sunlight, 45 degree elevated camera, refined chunky shapes and beautiful painterly detail, moss green / muted woodland palette. Actual transparent background, whole object fully visible with margin and small contact shadow. No text, no frame, no terrain tile, no scene. A single graceful brown red deer with small antlers, standing calmly and looking to the right, full animal silhouette, pale belly and warm brown fur."
+    },
+    {
+      "name": "terrain-meadow",
+      "prompt": "Use case: stylized-concept. Seamlessly tileable square ground texture for a hand-painted strategy game. True straight-down orthographic view, flat surface, no perspective, no horizon, no scene, no border, no words, no objects taller than pebbles. Soft even sunlight, fine painterly brushwork with gently faceted details. Fill the entire square edge to edge; all four edges must tile naturally. Quiet mossy meadow grass, muted olive and sage green with soft dry straw flecks, a few tiny pale daisies and sparse small warm pebbles, mostly soft fine grass. Low contrast, subtle organic patches."
+    },
+    {
+      "name": "terrain-forest",
+      "prompt": "Use case: stylized-concept. Seamlessly tileable square ground texture for a hand-painted strategy game. True straight-down orthographic view, flat surface, no perspective, no horizon, no scene, no border, no words, no objects taller than pebbles. Soft even sunlight, fine painterly brushwork with gently faceted details. Fill the entire square edge to edge; all four edges must tile naturally. Deep woodland floor, rich dark moss green, scattered short grass, fine pine needles, occasional tiny ferns and muted leaf litter. Low contrast, subtle organic patches, comfortable dark green base."
+    },
+    {
+      "name": "terrain-rocky",
+      "prompt": "Use case: stylized-concept. Seamlessly tileable square ground texture for a hand-painted strategy game. True straight-down orthographic view, flat surface, no perspective, no horizon, no scene, no border, no words, no objects taller than pebbles. Soft even sunlight, fine painterly brushwork with gently faceted details. Fill the entire square edge to edge; all four edges must tile naturally. Warm grey rocky earth, soft slate gravel and ochre sand between flat small stones, a few tiny moss patches. Restrained low contrast ground surface."
+    },
+    {
+      "name": "person-man",
+      "prompt": "Use case: stylized-concept. One individual full-body character sprite for a hand-painted isometric prehistoric village strategy game. Very elevated 45-degree view looking down, three-quarter facing lower right. Miniature game figurine proportions, clear silhouette, painterly faceted shading, warm upper-left light, muted natural ochres and browns. Whole figure, ample empty margin, actual transparent alpha background, no ground tile, no scene, no words or border. One adult male villager with short dark hair, warm medium-brown skin, rough tan woven sleeveless tunic and dark trousers, simple leather shoes, empty hands, relaxed walking stance."
+    },
+    {
+      "name": "person-woman",
+      "prompt": "Use case: stylized-concept. One individual full-body character sprite for a hand-painted isometric prehistoric village strategy game. Very elevated 45-degree view looking down, three-quarter facing lower right. Miniature game figurine proportions, clear silhouette, painterly faceted shading, warm upper-left light, muted natural ochres and browns. Whole figure, ample empty margin, actual transparent alpha background, no ground tile, no scene, no words or border. One adult female villager with dark braided hair, warm medium-brown skin, rust-red woven tunic and muted cream skirt, simple leather shoes, small gathering basket at the hip, relaxed walking stance."
+    },
+    {
+      "name": "person-child",
+      "prompt": "Use case: stylized-concept. One individual full-body character sprite for a hand-painted isometric prehistoric village strategy game. Very elevated 45-degree view looking down, three-quarter facing lower right. Miniature game figurine proportions, clear silhouette, painterly faceted shading, warm upper-left light, muted natural ochres and browns. Whole figure, ample empty margin, actual transparent alpha background, no ground tile, no scene, no words or border. One small child villager, short dark hair, warm medium-brown skin, simple ochre knee-length woven tunic, neutral happy expression, little leather shoes, relaxed standing pose, empty hands."
+    },
+    {
+      "name": "person-elder-man",
+      "prompt": "Use case: stylized-concept. Individual isolated game sprite for Black Box economy simulator. Actual transparent alpha background, entire subject centered with generous clear margin, small soft contact shadow only. No backdrop, no tile, no frame, no lettering. One elderly male villager, full body, grey hair and short grey beard, weathered warm tan skin, muted brown woven tunic and leggings, holding one plain walking staff, very elevated 45 degree isometric view facing lower right, painterly miniature strategy game figurine, warm top-left sunlight."
+    },
+    {
+      "name": "person-elder-woman",
+      "prompt": "Use case: stylized-concept. Individual isolated game sprite for Black Box economy simulator. Actual transparent alpha background, entire subject centered with generous clear margin, small soft contact shadow only. No backdrop, no tile, no frame, no lettering. One elderly female villager, full body, grey hair in a simple bun, weathered warm tan skin, muted teal-grey woven shawl and long ochre skirt, simple leather shoes, very elevated 45 degree isometric view facing lower right, painterly miniature strategy game figurine, warm top-left sunlight."
+    },
+    {
+      "name": "tree-oak",
+      "prompt": "Use case: stylized-concept. Individual isolated game sprite for Black Box economy simulator. Actual transparent alpha background, entire subject centered with generous clear margin, small soft contact shadow only. No backdrop, no tile, no frame, no lettering. One lush mature broadleaf oak tree, round irregular layered canopy of olive and moss green leaves, a gnarled short brown trunk, elevated 45 degree isometric view, beautiful hand-painted faceted strategy game art, warm sunlight on upper-left foliage, full tree and trunk visible."
+    },
+    {
+      "name": "wood-pile",
+      "prompt": "Create a polished hand-painted medieval woodland economy strategy game asset. A single small pile of six freshly cut oak logs with warm golden endgrain, rough bark, a tiny woodcutting stump and axe. Isolated isometric 3/4 view game prop from above 45 degrees. Warm natural pigments, painterly faceted forms, soft detailed brushwork, subtly dark contour, upper-left sunlight. Match a premium isometric village strategy game, grounded rustic materials. Centered on transparent background, no frame, no text, no UI, no scenery, no floor plane. Asset fills 80% of square image."
+    },
+    {
+      "name": "good-berries",
+      "prompt": "Create a polished hand-painted medieval woodland economy strategy game asset. One inventory icon: a tight cluster of five round vivid red woodland berries with two deep green leaves. Large readable silhouette. Warm natural pigments, painterly faceted forms, soft detailed brushwork, subtly dark contour, upper-left sunlight. Match a premium isometric village strategy game, grounded rustic materials. Centered on transparent background, no frame, no text, no UI, no scenery, no floor plane. Asset fills 80% of square image."
+    },
+    {
+      "name": "good-meat",
+      "prompt": "Create a polished hand-painted medieval woodland economy strategy game asset. One inventory icon: a single raw venison steak, red salmon flesh with cream fat rim, appetizing hand-painted simple silhouette. Warm natural pigments, painterly faceted forms, soft detailed brushwork, subtly dark contour, upper-left sunlight. Match a premium isometric village strategy game, grounded rustic materials. Centered on transparent background, no frame, no text, no UI, no scenery, no floor plane. Asset fills 80% of square image."
+    },
+    {
+      "name": "good-wood",
+      "prompt": "A single inventory icon for a premium hand-painted medieval woodland economy strategy game: a compact group of three diagonally arranged short oak logs with warm end grain. Centered large simple readable silhouette, square composition, isolated on fully transparent background. Warm natural pigments, painterly faceted forms, subtle dark contour, upper-left sunlight, grounded rustic materials. No frame, no text, no floor, no UI, no surrounding scenery."
+    },
+    {
+      "name": "good-stone",
+      "prompt": "A single inventory icon for a premium hand-painted medieval woodland economy strategy game: three chunky charcoal slate rocks with silver gray faceted planes. Centered large simple readable silhouette, square composition, isolated on fully transparent background. Warm natural pigments, painterly faceted forms, subtle dark contour, upper-left sunlight, grounded rustic materials. No frame, no text, no floor, no UI, no surrounding scenery."
+    },
+    {
+      "name": "good-spear",
+      "prompt": "A single inventory icon for a premium hand-painted medieval woodland economy strategy game: one complete primitive hunting spear with warm wooden shaft and flint tip bound with dark leather, diagonally bottom left to top right. Centered large simple readable silhouette, square composition, isolated on fully transparent background. Warm natural pigments, painterly faceted forms, subtle dark contour, upper-left sunlight, grounded rustic materials. No frame, no text, no floor, no UI, no surrounding scenery."
+    }
+  ]
+}

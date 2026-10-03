@@ -1,17 +1,36 @@
 @echo off
 setlocal
-set "ODIN=%USERPROFILE%\odin\dist\odin.exe"
-if not exist "%ODIN%" (
-    echo Odin compiler not found at %ODIN%
-    echo Install Odin or edit this script to point at odin.exe
-    exit /b 1
-)
+pushd "%~dp0"
+where go >nul 2>nul
+if errorlevel 1 goto missinggo
+where npm >nul 2>nul
+if errorlevel 1 goto missingnode
 if not exist build mkdir build
-echo Building Black Box Economy Simulator...
-"%ODIN%" build src -out:build\blackbox.exe -o:speed
-if errorlevel 1 exit /b 1
-copy /Y "%USERPROFILE%\odin\dist\vendor\raylib\windows\raylib.dll" build\raylib.dll >nul
-echo.
-echo Built build\blackbox.exe
-echo Run with run.bat   or   build\blackbox.exe --help
-endlocal
+pushd frontend
+call npm ci
+if errorlevel 1 goto failedinner
+call npm run build
+if errorlevel 1 goto failedinner
+popd
+pushd backend
+go build -o ..\build\blackbox-server.exe ./cmd/server
+if errorlevel 1 goto failedinner
+go build -o ..\build\simtool.exe ./cmd/simtool
+if errorlevel 1 goto failedinner
+go build -o ..\build\experiment.exe ./cmd/experiment
+if errorlevel 1 goto failedinner
+popd
+echo Built backend and frontend. Start with run.bat.
+popd
+exit /b 0
+:missinggo
+echo Go 1.26 or newer is required on PATH.
+goto failed
+:missingnode
+echo Node.js and npm are required on PATH.
+goto failed
+:failedinner
+popd
+:failed
+popd
+exit /b 1

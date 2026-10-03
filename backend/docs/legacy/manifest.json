@@ -1,0 +1,310 @@
+{
+  "purpose": "Pre-rewrite SHA-256 provenance. Odin source and tests were removed after Go parity verification; their comments survive in COMMENTS.md. Artwork and tools remain archived.",
+  "files": [
+    {
+      "path": "src/main.odin",
+      "sha256": "ef9fa1d4d201d7055ffd9cd47262b159bc6af29f45fde148e124043e546c2140",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/analysis/csv.odin",
+      "sha256": "e18d80d3245896000c3db71b21b6f7b324f8c899a709f7f6e4a223563008e8f3",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/analysis/experiments.odin",
+      "sha256": "2c52d10e365bb37f4e5f0299b37c637db77c1765cb1b46aa48de3e601ef66369",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/analysis/headless.odin",
+      "sha256": "8d0ea58bfadc1c9770dbbcf30074007e1f3c15a86c9b2e24b69a2049b0d1573e",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/analysis/selftest.odin",
+      "sha256": "6983f6590790521dceb5475ef1ef4eb05dec6573433cb2a190224d1a6e7dbe13",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/game/app.odin",
+      "sha256": "567f05e142c5495b767303596e398a7d240ab5579fd7d240f0fda6f9e815051b",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/game/assets.odin",
+      "sha256": "6907c1ebda5ba4e2d5b841872c16b13d8bfb0d95e44abbc6f7048ebc3d674c7d",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/game/charts.odin",
+      "sha256": "a18f6f13951d71162ee6d99199f9c3b10b19ee46a694de17b4be534081ffda9f",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/game/inspector.odin",
+      "sha256": "26ea2eabe22e25040087a9b0ba4257171e1f886c689845ae4c82bcc0acf39dea",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/game/map_view.odin",
+      "sha256": "28c46166df46d112f8fcfa66d13e5db2c0f891d4e3083eaa3871920596d6bd51",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/game/ui.odin",
+      "sha256": "12bf1d861f1f0fc1a10659225c73eb5f9efdbca7e67a7fd7001d82a1b1bcbfec",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/config.odin",
+      "sha256": "76f7608f522ce0563d7550d40d08d5d0ba7f0f06d7d6c49d8a65938536893975",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/decisions.odin",
+      "sha256": "47ca7bef58f1b786870a8b4c9f1376bd9564bc1b05802e9ae3d3064e98723903",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/events.odin",
+      "sha256": "d4a3b4ba331e9b56dcf78fa427e30eaa7a71bbd056788355d20c2cb58333a487",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/goods.odin",
+      "sha256": "f06e697bdfa120908eb58c2adb6bd757057ea257dcda69d9173cd508a52e59ca",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/households.odin",
+      "sha256": "c7f4c073a72c984821a47e4fef53613a9557d78ceb715a21ab7f77db313f53e4",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/marriage.odin",
+      "sha256": "a391b30e40ed2eeabba42490d233a25888dd914d07b93d48b9dbf2b51a1103e6",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/metrics.odin",
+      "sha256": "79c570a5b5141dd43eaad0fc769eaa229006a481ffba5aa4c7c51bf137e68385",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/people.odin",
+      "sha256": "f6d1fcb908f0952b31e53bb06999c2f9ae83799c33ed39dfffa9d2de07cb1ae6",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/production.odin",
+      "sha256": "84a7bd3350a929fdcd86a9ad884d69f136e0d370767887dc413f8801523adb9b",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/resources.odin",
+      "sha256": "791def37fa275c808c0b4edbd270136e95e6c0451a96333c3dac528122970558",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/rng.odin",
+      "sha256": "85818c19e713e5e54c9fc1e0756f16cbba7300607a7aeb8de304059c3ee20a04",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/simulation.odin",
+      "sha256": "122f7f39218ef377bbd126ed200a91408d700c948b07fe150c8e61ff77000865",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/spears.odin",
+      "sha256": "085eeca582ced5f45e6e90009791fa7a47111aaa8c39fbaf127bdbba8d2770a5",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/state_hash.odin",
+      "sha256": "ff58b93b56fa6443d9e7912714d613c2e51d5566ea653f1cff9a505e00cde838",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/trade.odin",
+      "sha256": "30d01601cabb7e9e8417f7f6a71500d68eef483972cd67bc8a260d5c3307c46f",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/types.odin",
+      "sha256": "325cd004f0507b4d3b589a00eb3f5edf4f8cb553487c25d20ffcceb3607c00ba",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/utility.odin",
+      "sha256": "b6c45c47a73c76e86e868d3f9568367080a8cec0e72017d783997bf84411b3c6",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/world.odin",
+      "sha256": "2e8fdfc13d770a1aa04716bdb86fbf5359dc85ce7b7b0f03610efbf3266bf06d",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "src/sim/worldgen.odin",
+      "sha256": "b2d3a42c1a3eac2e82fe803035f70e8ba209720f7b159ccf272a48d239ddf6c0",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "tests/barter.odin",
+      "sha256": "343f4d409419927d673c457c944569d7728fbf139b6bd7753ea98527135eefe5",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "tests/determinism.odin",
+      "sha256": "6f47226768d30d4272e9edd6b88c21fd17de6d585775ddb821729cfe848c1159",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "tests/inventory.odin",
+      "sha256": "8f0c63ac5f3f33ddefb75a4084670c77cb930c5c919b456c6fa70954360f9daf",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "tests/production.odin",
+      "sha256": "955eff24286be97e8841bc5efc2a169dde77f25a520fce695747da68b192e5e1",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "tests/regressions.odin",
+      "sha256": "dae3aefc4625dc3dd5226d9a88e525f6c13701d76da57a836304982c0c251bdd",
+      "status": "removed_after_go_migration"
+    },
+    {
+      "path": "assets/icons/activity_craft.png",
+      "sha256": "e90c880b3fa58b22d8023c612482cc99197516829540a4510228301012391d5b",
+      "status": "archived"
+    },
+    {
+      "path": "assets/icons/activity_forage.png",
+      "sha256": "cf915594cff468ece76865e515a82264e26993c0d059427b17f9c07ec32f8030",
+      "status": "archived"
+    },
+    {
+      "path": "assets/icons/activity_hunt.png",
+      "sha256": "b82efed84c1421a374f79b792d106175f2e37b6b9e9f498eb06ab2027c26a285",
+      "status": "archived"
+    },
+    {
+      "path": "assets/icons/activity_stone.png",
+      "sha256": "988f1cbb4eae57b004d35e70b2cd45eb9367fe1814aff3ff5d996c485b03c0cb",
+      "status": "archived"
+    },
+    {
+      "path": "assets/icons/activity_wood.png",
+      "sha256": "e97b395d4f28d8c2ca27b5f4e4c90838fa2263a2554b9515161624ac53bce151",
+      "status": "archived"
+    },
+    {
+      "path": "assets/icons/good_berries.png",
+      "sha256": "13c090d5dc7a8e47137b73d598cd42c18059c5b0a1a79ecab3c92a4a64dd8c42",
+      "status": "archived"
+    },
+    {
+      "path": "assets/icons/good_meat.png",
+      "sha256": "d97e88b8782095469695c4bf2c9744b98bf0d8c27d397c373ba6cc7b4f219729",
+      "status": "archived"
+    },
+    {
+      "path": "assets/icons/good_spear.png",
+      "sha256": "704aba917e5bbe26f30b6f4f337b30ddbb3f329a591933b98dc9bde6169d3787",
+      "status": "archived"
+    },
+    {
+      "path": "assets/icons/good_stone.png",
+      "sha256": "5ebd1544f97d63dda9f81b879002acdb8eebe8a631e07d4a24898ba5634177a9",
+      "status": "archived"
+    },
+    {
+      "path": "assets/icons/good_wood.png",
+      "sha256": "9b4ea93a4935af2cc35ef9cb21794ed60bdc8fb15d93c94ed456b649c70586f5",
+      "status": "archived"
+    },
+    {
+      "path": "assets/people/child.png",
+      "sha256": "ded4449dccf030fdeec4069a1ab2c4192b2e48c561335b8adac459e988980111",
+      "status": "archived"
+    },
+    {
+      "path": "assets/people/elder_man.png",
+      "sha256": "3832829d514285ff6b266068007407c22a7fc8a8f7b57d9586ea95c8cc91fb58",
+      "status": "archived"
+    },
+    {
+      "path": "assets/people/elder_woman.png",
+      "sha256": "e876923a880d3840d0feacc5e638b49202cf95a5332c3d0f218b3c42933bc207",
+      "status": "archived"
+    },
+    {
+      "path": "assets/people/man.png",
+      "sha256": "ab4b8f5705548faf3ccb0616acae85bd6648c468d51c4c1a027ce847b330e1a1",
+      "status": "archived"
+    },
+    {
+      "path": "assets/people/woman.png",
+      "sha256": "3cbcf07de66207eba8448a60c718c7b326cc35e2665677d33762a62a7399f424",
+      "status": "archived"
+    },
+    {
+      "path": "assets/resources/berries.png",
+      "sha256": "13c090d5dc7a8e47137b73d598cd42c18059c5b0a1a79ecab3c92a4a64dd8c42",
+      "status": "archived"
+    },
+    {
+      "path": "assets/resources/game.png",
+      "sha256": "7a0185ebfc624be2199fc066ae606f88bc451822ef12388af8a252f49aa05b58",
+      "status": "archived"
+    },
+    {
+      "path": "assets/resources/stone.png",
+      "sha256": "5ebd1544f97d63dda9f81b879002acdb8eebe8a631e07d4a24898ba5634177a9",
+      "status": "archived"
+    },
+    {
+      "path": "assets/resources/wood.png",
+      "sha256": "9b4ea93a4935af2cc35ef9cb21794ed60bdc8fb15d93c94ed456b649c70586f5",
+      "status": "archived"
+    },
+    {
+      "path": "assets/structures/hut_01.png",
+      "sha256": "13d87acf7b9f2aa625c5b62678da1fd6991ed100db7c8ff78b7daba3d9a9c4c4",
+      "status": "archived"
+    },
+    {
+      "path": "assets/structures/hut_02.png",
+      "sha256": "8f64ef3a911d3a0163549afc02547034b88896e1da8de7b476b1e46540857482",
+      "status": "archived"
+    },
+    {
+      "path": "assets/structures/hut_03.png",
+      "sha256": "26d31f43071503d26a6ee0742599fd547eb5492b0387b168f34d7ac2c1c8e120",
+      "status": "archived"
+    },
+    {
+      "path": "assets/terrain/forest_floor.png",
+      "sha256": "103e3004c895d67e83f9cc11a163698d131042782bfa4053fa73e2609a3afeda",
+      "status": "archived"
+    },
+    {
+      "path": "assets/terrain/meadow.png",
+      "sha256": "d121364d33b339a1d8b9bb624931bf3becdb3f432ece095f906f2d1463d857cc",
+      "status": "archived"
+    },
+    {
+      "path": "assets/terrain/rocky.png",
+      "sha256": "e70bd39ae8ba49752ae7d05a231a595553bd79969ae611ed9c7e2b22ae9a68f6",
+      "status": "archived"
+    },
+    {
+      "path": "tools/process_assets.py",
+      "sha256": "53674b171a1359a8bae0e5c7e0ba0af9b1d4671d10f9fc3c7affe375941ec0fa",
+      "status": "archived"
+    }
+  ]
+}
